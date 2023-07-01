@@ -1,0 +1,223 @@
+diff --git a/lesson2/index.html b/lesson2/index.html
+index 44db315..c4d666d 100644
+--- a/lesson2/index.html
++++ b/lesson2/index.html
+@@ -7,5 +7,6 @@
+ </head>
+ <body>
+     <h1>Заголовок</h1>
++    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit error ea sequi ut eos dolorum vel fugiat iure mollitia quasi modi cumque neque repellendus officia cum nisi, quibusdam excepturi omnis!</p>
+ </body>
+:...skipping...
+diff --git a/lesson2/index.html b/lesson2/index.html
+index 44db315..c4d666d 100644
+--- a/lesson2/index.html
++++ b/lesson2/index.html
+@@ -7,5 +7,6 @@
+ </head>
+ <body>
+     <h1>Заголовок</h1>
++    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit error ea sequi ut eos dolorum vel fugiat iure mollitia quasi modi cumque neque repellendus officia cum nisi, quibusdam excepturi omnis!</p>
+ </body>
+ </html>
+\ No newline at end of file
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git diff 02beee9
+diff --git a/lesson2/index.html b/lesson2/index.html
+index 44db315..c4d666d 100644
+--- a/lesson2/index.html
++++ b/lesson2/index.html
+@@ -7,5 +7,6 @@
+ </head>
+ <body>
+     <h1>Заголовок</h1>
++    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit error ea sequi ut eos dolorum vel fugiat iure mollitia quasi modi cumque neque repellendus officia cum nisi, quibusdam excepturi omnis!</p>
+ </body>
+ </html>
+\ No newline at end of file
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+2b7f84d (HEAD -> master) Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git diff f79bc3a
+diff --git a/lesson2/index.html b/lesson2/index.html
+index d01f779..c4d666d 100644
+--- a/lesson2/index.html
++++ b/lesson2/index.html
+@@ -6,6 +6,7 @@
+     <title>Document</title>
+ </head>
+ <body>
+-
++    <h1>Заголовок</h1>
++    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Velit error ea sequi ut eos dolorum vel fugiat iure mollitia quasi modi cumque neque repellendus officia cum nisi, quibusdam excepturi omnis!</p>
+ </body>
+ </html>
+\ No newline at end of file
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+    -S, --gpg-sign[=<key-id>]
+                          GPG sign commit
+    --reference           use the 'reference' format to refer to commits
+
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git revert 2b7f84d
+[master a900b1c] Revert "Добавили параграф  файлу index.html"
+ 1 file changed, 1 deletion(-)
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git revert 02beee9
+[master d9623ec] Revert "Добавили заголовок файлу index.html"
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git revert f79bc3a
+[master 27b2978] Revert "добавили структуру  файла index.html"
+ 1 file changed, 11 deletions(-)
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+27b2978 (HEAD -> master) Revert "добавили структуру  файла index.html"
+d9623ec Revert "Добавили заголовок файлу index.html"
+a900b1c Revert "Добавили параграф  файлу index.html"
+2b7f84d Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git reset --soft 27b2978
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git reset --soft d9623ec
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   lesson2/index.html
+
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git restore
+fatal: you must specify path(s) to restore
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+d9623ec (HEAD -> master) Revert "Добавили заголовок файлу index.html"
+a900b1c Revert "Добавили параграф  файлу index.html"
+2b7f84d Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   lesson2/index.html
+
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git restore --staged index.html
+error: pathspec 'index.html' did not match any file(s) known to git
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git restore --staged lesson2/index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   lesson2/index.html
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git restore lesson2/index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+d9623ec (HEAD -> master) Revert "Добавили заголовок файлу index.html"
+a900b1c Revert "Добавили параграф  файлу index.html"
+2b7f84d Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git reset a900b1c
+Unstaged changes after reset:
+M       lesson2/index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+a900b1c (HEAD -> master) Revert "Добавили параграф  файлу index.html"
+2b7f84d Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   lesson2/index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+a900b1c (HEAD -> master) Revert "Добавили параграф  файлу index.html"
+2b7f84d Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git reset --hard 2b7f84d
+HEAD is now at 2b7f84d Добавили параграф  файлу index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git log --oneline
+2b7f84d (HEAD -> master) Добавили параграф  файлу index.html
+02beee9 Добавили заголовок файлу index.html
+f79bc3a добавили структуру  файла index.html
+366b24a добавили файл index.html
+
+Maks@MSI MINGW64 ~/Desktop/Git-HW (master)
+$ git status
+On branch master
+nothing to commit, working tree clean
